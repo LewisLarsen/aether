@@ -28,10 +28,10 @@
 
                             <!-- Current Email -->
                                 <div>
-                                    <x-label for="name" :value="__('Current Email')"/>
+                                    <x-label for="current_email" :value="__('Current Email')"/>
 
-                                    <x-input id="name" class="block mt-1 w-full cursor-not-allowed bg-gray-50" type="text"
-                                             name="name" value="{{ Auth::user()->email }}" required disabled autofocus/>
+                                    <x-input id="current_email" class="block mt-1 w-full cursor-not-allowed bg-gray-50" type="email"
+                                             name="current_email" value="{{ Auth::user()->email }}" disabled/>
                                 </div>
 
                                 <!-- Password -->
@@ -44,22 +44,22 @@
 
                                 <!-- New Email -->
                                 <div class="mt-4">
-                                    <x-label for="new_email" :value="__('New Email')"/>
+                                    <x-label for="email" :value="__('New Email')"/>
 
-                                    <x-input id="new_email" class="block mt-1 w-full"
+                                    <x-input id="email" class="block mt-1 w-full"
                                              type="email"
-                                             name="new_email"
-                                             required />
+                                             name="email"
+                                             required autofocus />
                                 </div>
 
                                 <!-- Confirm New Email -->
                                 <div class="mt-4">
-                                    <x-label for="new_email_confirmation" :value="__('Confirm New Email')"/>
+                                    <x-label for="email_confirmation" :value="__('Confirm New Email')"/>
 
-                                    <x-input id="new_email_confirmation" class="block mt-1 w-full"
+                                    <x-input id="email_confirmation" class="block mt-1 w-full"
                                              type="email"
-                                             name="new_email_confirmation"
-                                             required />
+                                             name="email_confirmation"
+                                             required autofocus />
                                 </div>
                                 <x-button class="mt-3">
                                     {{ __('Update') }}
