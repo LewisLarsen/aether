@@ -27,7 +27,8 @@ class UpdateEmailController extends Controller {
 
         $request->validate([
             'password' => ['required', 'password'],
-            'email' => ['required', Rule::unique('users')->ignore(Auth::user()->id), 'min:6', 'confirmed', 'string'],
+            'email' => ['required', 'password', Rule::unique('users')->ignore(Auth::user()->id)],
+            'new_email' => ['required', 'min:6', 'confirmed', 'string'],
         ]);
 
         User::where('id', '=', Auth::user()->id)->update([
