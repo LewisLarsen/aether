@@ -3,39 +3,38 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Models\User;
 use Auth;
 use Hash;
-use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
-class UpdateNameController extends Controller {
-
-    public function index() {
-
+class UpdateNameController extends Controller
+{
+    public function index()
+    {
         if (config('aether.can_change_name')) {
             return view('account.name');
         }
+
         return abort(404);
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         if (!(Hash::check($request->get('password'), Auth::user()->password))) {
-            return redirect()->back()->withErrors("You have entered an incorrect password. Please try again.");
+            return redirect()->back()->withErrors('You have entered an incorrect password. Please try again.');
         }
 
         $request->validate([
             'password' => ['required', 'password'],
-            'name' => ['required', Rule::unique('users')->ignore(Auth::user()->id)]
+            'name'     => ['required', Rule::unique('users')->ignore(Auth::user()->id)],
         ]);
 
         User::where('id', '=', Auth::user()->id)->update([
             config('aether.name_column', 'name') => $request->input('name'),
         ]);
 
-
         return redirect()->back()->with('account-success', 'Your account has been updated successfully.');
     }
-
 }
