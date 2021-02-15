@@ -1,6 +1,19 @@
-# Laravel Breeze Account Settings Scaffolding Package
+# Aether - Account Scaffolding for Laravel Breeze
 
-I got tired of having to copy/paste account settings from project to project so I made this as an extension to Laravel Breeze.
+Aether adds user account page functionality for Laravel Breeze, Aether requires Laravel Breeze in order to work. The following pages are introduced by Aether:
+
+- Account Home
+- Update Avatar
+- Update Name Form
+- Update Password Form
+- Update Email Form
+
+![Aether Account Home](https://i.imgur.com/47Q7U4d.png)
+
+![Aether Account Avatar](https://i.imgur.com/B1a8wdC.png)
+
+![Aether Account Name](https://i.imgur.com/llC2GjA.png)
+
 
 This works with Laravel Breeze version v1.0.2 at the very least, and should continue to work unless breaking changes are introduced in Laravel Breeze.
 
@@ -79,7 +92,7 @@ The parameter is optional and Aether will fall back to UI-Avatars should the use
 ```
 If the `use_fancy_avatar_paths` configuration value is set to true, this will determine the sizes of the avatars as four sizes will be made alongside the original file being uploaded. Please note that any changes to these values will not affect already uploaded avatars, only ones that are uploaded after the values have been modified.
 
-### Aether's Avatar Route
+## Aether's Avatar Route
 
 Aether has an avatar route which can be found at the `avatars` subdomain. An example of the route is below.
 ```
@@ -91,3 +104,20 @@ avatars.domain.com/u/1/l
 avatars.domain.com/u/1/xl
 ```
 Should the user have no avatar, the trait will fall back to UI Avatars, in which case the avatars route will return a 404 as it's only used for uploaded user content. 
+
+## Aether Account Flash Messages
+Aether comes with a flash message component for the account pages. 
+```
+$request->session()->flash('account-success', 'Success message!');
+$request->session()->flash('account-error', 'Error message!');
+$request->session()->flash('account-warning', 'Warning message!');
+$request->session()->flash('account-info', 'Info message!');
+```
+
+## Application-wide Banner Messages
+The banner message component for this came from [Laravel Jetstream](https://jetstream.laravel.com/2.x/building-your-app.html#banner-alerts).
+```
+$request->session()->flash('flash.banner', 'Yay it works!');
+$request->session()->flash('flash.bannerStyle', 'success');
+
+```
