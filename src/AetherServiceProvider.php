@@ -24,7 +24,7 @@ class AetherServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function boot()
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
