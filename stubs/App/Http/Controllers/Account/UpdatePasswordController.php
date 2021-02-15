@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use App\Models\User;
+use LewisLarsen\Aether\Notifications\PasswordWasChangedNotification;
 
 class UpdatePasswordController extends Controller {
 
@@ -33,9 +34,11 @@ class UpdatePasswordController extends Controller {
             'new_password' => ['required', 'min:6', 'confirmed', 'string'],
         ]);
 
-        User::where('id', '=', Auth::user()->id)->update([
+        $user = User::where('id', '=', Auth::user()->id)->update([
             'password' => bcrypt($request->get('new_password')),
         ]);
+
+        Auth::user()->notify(new PasswordWasChangedNotification(Auth::user()));
 
         return redirect()->back()->with('account-success', 'Your account has been updated successfully.');
     }
